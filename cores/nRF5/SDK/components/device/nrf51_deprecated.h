@@ -1,4 +1,4 @@
-/* Copyright (c) 2015, Nordic Semiconductor ASA
+/* Copyright (c) 2016, Nordic Semiconductor ASA
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,6 +47,8 @@
 /* The interrupt ISR was renamed. Adding old name to the macros. */
 #define LPCOMP_COMP_IRQHandler      LPCOMP_IRQHandler
 #define LPCOMP_COMP_IRQn            LPCOMP_IRQn
+/* Corrected typo in RESULT register. */
+#define LPCOMP_RESULT_RESULT_Bellow     LPCOMP_RESULT_RESULT_Below
  
  
 /* MPU */

@@ -1,4 +1,4 @@
-#ifdef NRF52
+#if defined(NRF52) && !defined(NRF52840_XXAA)
 /* Copyright (c) 2013 ARM LIMITED
 
    All rights reserved.
@@ -29,9 +29,15 @@
     .syntax unified
     .arch armv7e-m
 
+#ifdef __STARTUP_CONFIG
+#include "startup_config.h"
+#endif
+
     .section .stack
     .align 3
-#ifdef __STACK_SIZE
+#if defined(__STARTUP_CONFIG)
+    .equ    Stack_Size, __STARTUP_CONFIG_STACK_SIZE
+#elif defined(__STACK_SIZE)
     .equ    Stack_Size, __STACK_SIZE
 #else
     .equ    Stack_Size, 8192
@@ -46,7 +52,9 @@ __StackTop:
 
     .section .heap
     .align 3
-#ifdef __HEAP_SIZE
+#if defined(__STARTUP_CONFIG)
+    .equ Heap_Size, __STARTUP_CONFIG_HEAP_SIZE
+#elif defined(__HEAP_SIZE)
     .equ Heap_Size, __HEAP_SIZE
 #else
     .equ    Heap_Size, 8192
@@ -77,7 +85,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   SVC_Handler
-    .long   DebugMonitor_Handler
+    .long   DebugMon_Handler
     .long   0                           /*Reserved */
     .long   PendSV_Handler
     .long   SysTick_Handler
@@ -450,11 +458,11 @@ SVC_Handler:
     .size   SVC_Handler, . - SVC_Handler
 
 
-    .weak   DebugMonitor_Handler
-    .type   DebugMonitor_Handler, %function
-DebugMonitor_Handler:
+    .weak   DebugMon_Handler
+    .type   DebugMon_Handler, %function
+DebugMon_Handler:
     b       .
-    .size   DebugMonitor_Handler, . - DebugMonitor_Handler
+    .size   DebugMon_Handler, . - DebugMon_Handler
 
 
     .weak   PendSV_Handler

@@ -63,6 +63,7 @@ const uint32_t g_ADigitalPinMap[] = {
   31,
 
   // BTN
-  2
+  2,
+  (uint32_t)-1 // NC
 
 };

@@ -26,3 +26,6 @@ blackmagicprobe.program.protocol=
 blackmagicprobe.program.tool=blackmagicprobe
 blackmagicprobe.bootloader.tool=sandeepmistry:blackmagicprobe
 blackmagicprobe.program.extra_params=;
+
+nrfjprog.name=nRFjprog
+nrfjprog.program.tool=nrfjprog

@@ -59,5 +59,6 @@ const uint32_t g_ADigitalPinMap[] = {
   // RBG
   19,
   18,
-  17
+  17,
+  (uint32_t)-1 // NC
 };

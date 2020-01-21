@@ -43,6 +43,8 @@ extern "C"
   #define NUM_ANALOG_INPUTS    (0u)
   #define NUM_ANALOG_OUTPUTS   (0u)
 
+  #define NC                   (PINS_COUNT)
+
   // LEDs
   #define PIN_LED1                (4)
   #define PIN_LED2                (5)
@@ -64,6 +66,8 @@ extern "C"
   #define NUM_DIGITAL_PINS     (32u)
   #define NUM_ANALOG_INPUTS    (0u)
   #define NUM_ANALOG_OUTPUTS   (0u)
+
+  #define NC                   (PINS_COUNT)
 
   // LEDs
   #define PIN_LED0                (18)
@@ -88,6 +92,8 @@ extern "C"
   #define NUM_DIGITAL_PINS     (32u)
   #define NUM_ANALOG_INPUTS    (6u)
   #define NUM_ANALOG_OUTPUTS   (0u)
+
+  #define NC                   (PINS_COUNT)
 
   // LEDs
   #define PIN_LED1                (8)

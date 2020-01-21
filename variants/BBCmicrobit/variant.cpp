@@ -64,5 +64,6 @@ const uint32_t g_ADigitalPinMap[] = {
   27, // ACCEL INT 2
   29, // MAG INT 2
 
-  19 // RST
+  19, // RST
+  (uint32_t)-1  // NC
 };

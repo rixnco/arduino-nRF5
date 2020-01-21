@@ -51,5 +51,6 @@ const uint32_t g_ADigitalPinMap[] = {
   (uint32_t)-1,
   (uint32_t)-1,
   (uint32_t)-1,
-  (uint32_t)-1
+  (uint32_t)-1,
+  (uint32_t)-1 // NC
 };

@@ -37,6 +37,8 @@ extern "C"
 #define NUM_ANALOG_INPUTS    (6u)
 #define NUM_ANALOG_OUTPUTS   (0u)
 
+#define NC		     (PINS_COUNT)
+
 // LEDs
 #define PIN_LED                 (13)
 #define LED_BUILTIN             PIN_LED

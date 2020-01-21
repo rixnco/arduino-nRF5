@@ -1,4 +1,4 @@
-/* Copyright (c) 2015, Nordic Semiconductor ASA
+/* Copyright (c) 2012 ARM LIMITED
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,9 +11,9 @@
  *     this list of conditions and the following disclaimer in the documentation
  *     and/or other materials provided with the distribution.
  *
- *   * Neither the name of Nordic Semiconductor ASA nor the names of its
- *     contributors may be used to endorse or promote products derived from
- *     this software without specific prior written permission.
+ *   * Neither the name of ARM nor the names of its contributors may be used to
+ *     endorse or promote products derived from this software without specific
+ *     prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -28,7 +28,8 @@
  *
  */
 
-#ifdef NRF52
+#if defined(NRF52) && !defined(NRF52840_XXAA)
+
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -46,6 +47,7 @@ static bool errata_36(void);
 static bool errata_37(void);
 static bool errata_57(void);
 static bool errata_66(void);
+static bool errata_108(void);
 
 
 #if defined ( __CC_ARM )
@@ -126,6 +128,12 @@ void SystemInit(void)
         NRF_TEMP->T4 = NRF_FICR->TEMP.T4;
     }
 
+    /* Workaround for Errata 108 "RAM: RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
+       for your device located at https://infocenter.nordicsemi.com/  */
+    if (errata_108()){
+        *(volatile uint32_t *)0x40000EE4 = *(volatile uint32_t *)0x10000258 & 0x0000004F;
+    }
+    
     /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
      * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
      * operations are not used in your code. */
@@ -194,10 +202,8 @@ void SystemInit(void)
 
 static bool errata_16(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0))
-    {
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30)
-        {
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
@@ -207,18 +213,14 @@ static bool errata_16(void)
 
 static bool errata_31(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0))
-    {
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30)
-        {
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40)
-        {
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
             return true;
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50)
-        {
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
             return true;
         }
     }
@@ -228,10 +230,8 @@ static bool errata_31(void)
 
 static bool errata_32(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0))
-    {
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30)
-        {
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
@@ -241,18 +241,14 @@ static bool errata_32(void)
 
 static bool errata_36(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0))
-    {
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30)
-        {
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40)
-        {
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
             return true;
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50)
-        {
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
             return true;
         }
     }
@@ -262,10 +258,8 @@ static bool errata_36(void)
 
 static bool errata_37(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0))
-    {
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30)
-        {
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
@@ -275,10 +269,8 @@ static bool errata_37(void)
 
 static bool errata_57(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0))
-    {
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30)
-        {
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
@@ -288,10 +280,26 @@ static bool errata_57(void)
 
 static bool errata_66(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0))
-    {
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50)
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+static bool errata_108(void)
         {
+    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+            return true;
+        }
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
+            return true;
+        }
+        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
             return true;
         }
     }

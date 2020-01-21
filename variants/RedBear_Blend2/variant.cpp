@@ -55,5 +55,6 @@ const uint32_t g_ADigitalPinMap[] = {
   6,
 
   // AREF
-  2
+  2,
+  (uint32_t)-1 // NC
 };

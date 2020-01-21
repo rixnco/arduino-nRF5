@@ -61,6 +61,54 @@ Generic_nRF52832.menu.lfclk.lfsynt=Synthesized
 Generic_nRF52832.menu.lfclk.lfsynt.build.lfclk_flags=-DUSE_LFSYNT
 
 
+#
+# GT832_C01
+#
+
+GT832_C01.name=GT832_C01
+
+GT832_C01.upload.tool=bmp
+GT832_C01.upload.protocol=bmp						 
+GT832_C01.upload.interface=bmp				 
+GT832_C01.upload.target=nrf52
+GT832_C01.upload.maximum_size=409600
+GT832_C01.upload.setup_command=
+GT832_C01.upload.speed=230400
+GT832_C01.upload.use_1200bps_touch=false
+GT832_C01.upload.wait_for_upload_port=false
+GT832_C01.upload.native_usb=false
+
+GT832_C01.bootloader.tool=bmp
+
+GT832_C01.build.mcu=cortex-m4
+GT832_C01.build.f_cpu=16000000
+GT832_C01.build.board=GT832_C01
+GT832_C01.build.core=nRF5
+GT832_C01.build.variant=GT832_C01
+GT832_C01.build.variant_system_lib=
+GT832_C01.build.extra_flags=-DNRF52 -DNRF52832
+GT832_C01.build.float_flags=-mfloat-abi=hard -mfpu=fpv4-sp-d16
+GT832_C01.build.ldscript=nrf52_xxaa.ld
+
+GT832_C01.build.lfclk_flags=-DUSE_LFXO
+
+GT832_C01.menu.softdevice.none=None
+GT832_C01.menu.softdevice.none.softdevice=
+GT832_C01.menu.softdevice.none.softdeviceversion=
+
+GT832_C01.menu.softdevice.s132=S132
+GT832_C01.menu.softdevice.s132.softdevice=s132
+GT832_C01.menu.softdevice.s132.softdeviceversion=3.0.0
+GT832_C01.menu.softdevice.s132.upload.maximum_size=409600
+GT832_C01.menu.softdevice.s132.build.extra_flags=-DNRF52 -DS132 -DNRF52_S132 -DNRF52832
+GT832_C01.menu.softdevice.s132.build.ldscript=armgcc_s132_nrf52832_xxaa.ld
+
+
+GT832_C01.softdevice=s132
+
+
+
+
 
 bluey.name=Electronut labs bluey
 

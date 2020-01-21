@@ -41,5 +41,6 @@ const uint32_t g_ADigitalPinMap[] = {
   19,
 
   // A5 / D14
-  6
+  6,
+  (uint32_t)-1 // NC
 };

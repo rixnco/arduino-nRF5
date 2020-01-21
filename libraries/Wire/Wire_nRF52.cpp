@@ -69,7 +69,7 @@ void TwoWire::begin(void) {
   _p_twim->PSEL.SDA = _uc_pinSDA;
 
   NVIC_ClearPendingIRQ(_IRQn);
-  NVIC_SetPriority(_IRQn, 2);
+  NVIC_SetPriority(_IRQn, 3);
   NVIC_EnableIRQ(_IRQn);
 }
 

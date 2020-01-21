@@ -38,6 +38,8 @@ extern "C"
 #define NUM_ANALOG_INPUTS    (6)
 #define NUM_ANALOG_OUTPUTS   (0)
 
+#define NC                   (PINS_COUNT)
+
 // LEDs
 
 #define PIN_LED              (0) // no user LED; use pad 0

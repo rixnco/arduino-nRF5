@@ -29,6 +29,7 @@ const uint32_t g_ADigitalPinMap[] = {
   21, // LED Red
   22, // LED Green
   23, // LED Blue
+  (uint32_t)-1 // NC
 };
 #else
 const uint32_t g_ADigitalPinMap[] = {
@@ -63,6 +64,7 @@ const uint32_t g_ADigitalPinMap[] = {
   28,
   29,
   30,
-  31
+  31,
+  (uint32_t)-1 // NC
 };
 #endif

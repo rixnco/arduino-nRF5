@@ -56,4 +56,5 @@ const uint32_t g_ADigitalPinMap[] = {
   23, // unassigned
   24, // usb serial TX
   25, // usb serial RX
+  (uint32_t)-1 // NC
 };
